@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -19,241 +18,814 @@
       --sans: 'DM Sans', sans-serif;
     }
 
-```
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--sans);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+    html { scroll-behavior: smooth; }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(74, 240, 196, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(74, 240, 196, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-  z-index: 0;
-}
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 3rem;
-  background: rgba(10, 12, 16, 0.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-}
+    /* ── Grid lines background ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(74, 240, 196, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(74, 240, 196, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-.nav-logo {
-  font-family: var(--mono);
-  font-size: 0.85rem;
-  color: var(--accent);
-}
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(10, 12, 16, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
 
-.nav-links {
-  display: flex;
-  gap: 2.5rem;
-  list-style: none;
-}
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
 
-.nav-links a {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  color: var(--muted);
-  text-decoration: none;
-  text-transform: uppercase;
-}
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
 
-/* HERO LAYOUT */
-#hero {
-  position: relative;
-  z-index: 1;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 0 3rem;
-  max-width: 1100px;
-  margin: 0 auto;
-}
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
 
-.hero-flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
-  padding-top: 5rem;
-  width: 100%;
-}
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.25s;
+    }
 
-.hero-text {
-  flex: 1;
-  min-width: 300px;
-}
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover::after { width: 100%; }
 
-.hero-image {
-  flex-shrink: 0;
-}
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-.profile-pic {
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(74, 240, 196, 0.4);
-  box-shadow: 0 0 25px rgba(74, 240, 196, 0.15);
-}
+    .hero-inner {
+      padding-top: 5rem;
+      animation: fadeUp 0.9s ease both;
+    }
 
-.hero-tag {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  color: var(--accent);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-}
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
 
-h1 {
-  font-size: clamp(3rem, 7vw, 6rem);
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-}
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+    }
 
-h1 .line2 {
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(232, 234, 240, 0.3);
-}
+    h1 {
+      font-family: var(--sans);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
 
-.hero-desc {
-  max-width: 560px;
-  font-size: 1.05rem;
-  line-height: 1.75;
-  color: var(--muted);
-  margin-bottom: 2.5rem;
-}
+    h1 .line2 {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(232, 234, 240, 0.3);
+    }
 
-.hero-contact {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.75rem;
-}
+    .hero-desc {
+      max-width: 560px;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
 
-.contact-btn {
-  padding: 0.65rem 1.25rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  color: var(--muted);
-  text-decoration: none;
-}
+    .hero-desc strong { color: var(--text); font-weight: 600; }
 
-.hero-cta {
-  display: flex;
-  gap: 1rem;
-}
+    .hero-location {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
 
-.btn {
-  padding: 0.75rem 1.75rem;
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  text-decoration: none;
-  text-transform: uppercase;
-}
+    .hero-contact {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.75rem;
+    }
 
-.btn-primary {
-  background: var(--accent);
-  color: #0a0c10;
-  border: 1px solid var(--accent);
-}
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: all 0.2s;
+    }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .hero-flex {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .contact-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
 
-  .profile-pic {
-    width: 160px;
-    height: 160px;
-    margin-top: 2rem;
-  }
-}
-```
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
 
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0c10;
+      border: 1px solid var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--accent);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent2);
+      color: var(--accent2);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 3rem;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 1.5rem; height: 1px;
+      background: var(--accent);
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 3rem;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ── RESUME ── */
+    .resume-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 0;
+    }
+
+    .resume-sidebar {
+      border-right: 1px solid var(--border);
+      padding-right: 3rem;
+    }
+
+    .resume-main {
+      padding-left: 3rem;
+    }
+
+    .resume-block {
+      margin-bottom: 2.5rem;
+    }
+
+    .resume-block-title {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .skill-list li {
+      font-size: 0.85rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .skill-list li::before {
+      content: '▸';
+      color: var(--accent);
+      font-size: 0.6rem;
+    }
+
+    .cert-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0.7rem;
+      background: rgba(74, 240, 196, 0.06);
+      border: 1px solid rgba(74, 240, 196, 0.2);
+      border-radius: 2px;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .cert-badge.in-progress {
+      opacity: 0.6;
+    }
+
+    .exp-item {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.4rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .exp-role {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .exp-dates {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    .exp-company {
+      font-size: 0.85rem;
+      color: var(--accent2);
+      margin-bottom: 0.85rem;
+      font-weight: 600;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .exp-bullets li {
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: #a0a8b8;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.75rem;
+      top: 0.1rem;
+    }
+
+    .exp-bullets li strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .exp-subrole {
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    .exp-subrole-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .exp-subrole-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent2);
+    }
+
+    .exp-disclosure {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      font-style: italic;
+      margin-bottom: 0.85rem;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover {
+      border-color: rgba(74, 240, 196, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .project-card:hover::before { transform: scaleX(1); }
+
+    .project-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .project-desc {
+      font-size: 0.83rem;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .project-footer {
+      margin-top: 1.25rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tag-pill {
+      padding: 0.2rem 0.6rem;
+      background: rgba(74, 143, 255, 0.08);
+      border: 1px solid rgba(74, 143, 255, 0.2);
+      border-radius: 2px;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent2);
+    }
+
+    /* ── CONTACT ── */
+    .contact-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: all 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      #hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .resume-grid { grid-template-columns: 1fr; }
+      .resume-sidebar { border-right: none; padding-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 2.5rem; margin-bottom: 2.5rem; }
+      .resume-main { padding-left: 0; }
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 1.5rem; }
+    }
   </style>
 </head>
-
 <body>
 
-<nav>
-  <span class="nav-logo">Blair Ellis</span>
-  <ul class="nav-links">
-    <li><a href="#resume">Resume</a></li>
-    <li><a href="#projects">Projects</a></li>
-  </ul>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">Blair Ellis</span>
+    <ul class="nav-links">
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+  </nav>
 
-<div id="hero">
-  <div class="hero-flex">
-
-```
-<div class="hero-text">
-
-  <div class="hero-tag">Senior IAM Engineer</div>
-
-  <h1>
-    Blair<br/>
-    <span class="line2">Ellis</span>
-  </h1>
-
-  <div class="hero-contact">
-    <a id="hero-email-link" class="contact-btn"></a>
-    <a href="tel:4848890365" class="contact-btn">(484) 889-0365</a>
-    <a href="https://www.linkedin.com/in/blair-ellis-b2b24193" target="_blank" class="contact-btn">LinkedIn</a>
+  <!-- HERO -->
+  <div id="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">Senior IAM Engineer</div>
+      <h1>
+        Blair<br/>
+        <span class="line2">Ellis</span>
+      </h1>
+      <div class="hero-location">Honey Brook, PA · Greater Philadelphia Area</div>
+      <div class="hero-contact">
+        <a id="hero-email-link" target="_blank" class="contact-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span id="hero-email-text"></span>
+        </a>
+        <a href="tel:4848890365" class="contact-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+          (484) 889-0365
+        </a>
+        <a href="https://www.linkedin.com/in/blair-ellis-b2b24193" target="_blank" class="contact-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <script>
+        (function() {
+          var u = 'blair93ellis'; var d = 'gmail.com'; var e = u + '@' + d;
+          var el = document.getElementById('hero-email-link');
+          el.href = 'mailto:' + e;
+          document.getElementById('hero-email-text').textContent = e;
+        })();
+      </script>
+      <p class="hero-desc">
+        Senior IAM Engineer with <strong>4 years of healthcare enterprise experience</strong> and full programmatic ownership of identity across <strong>dual Entra ID tenants (Azure Active Directory), Okta, and CyberArk PAM</strong>. Built and governed IAM infrastructure securing ~3,000 users and 250+ applications — driving <strong>$500K+ in projected annual savings</strong>, a 45% to 95% Entra Secure Score improvement, and a zero-downtime migration of 1,400 users to a greenfield Entra ID tenant. Deep expertise in Zero Trust architecture, Conditional Access, privileged access governance, and identity lifecycle automation across hybrid AD and cloud-native environments. Outside of work, I maintain a hybrid identity home lab running Windows Server 2022, AD DS, Entra Connect Sync, and Okta alongside PowerShell-driven JML automation, continuously building and refining the architecture patterns I bring into enterprise environments.
+      </p>
+      <div class="hero-cta">
+        <a href="https://docs.google.com/document/d/1obp_W2KzepL1Z47gvytoWHO0LbhUkbyZ1vpfmephJe8/edit?usp=sharing" target="_blank" class="btn btn-ghost">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Resume (DOCX)
+        </a>
+      </div>
+    </div>
   </div>
 
-  <script>
-    (function() {
-      var u = 'blair93ellis'; var d = 'gmail.com'; var e = u + '@' + d;
-      var el = document.getElementById('hero-email-link');
-      el.href = 'mailto:' + e;
-      el.textContent = e;
-    })();
-  </script>
+  <hr class="divider" />
 
-  <p class="hero-desc">
-    Senior IAM Engineer with 4 years of enterprise experience across Entra ID, Okta, and CyberArk. Built and secured identity infrastructure for 3,000+ users, delivering major cost savings and zero-downtime migrations.
-  </p>
+  <!-- RESUME -->
+  <section id="resume">
+    <div class="section-label">01 — Experience</div>
+    <h2 class="section-title">Resume</h2>
+    <div class="resume-grid">
 
-  <div class="hero-cta">
-    <a href="https://docs.google.com/document/d/1obp_W2KzepL1Z47gvytoWHO0LbhUkbyZ1vpfmephJe8/edit?usp=sharing" target="_blank" class="btn btn-primary">
-      Download Resume
-    </a>
-  </div>
+      <!-- Sidebar -->
+      <div class="resume-sidebar">
 
-</div>
+        <div class="resume-block">
+          <div class="resume-block-title">Identity & IAM</div>
+          <ul class="skill-list">
+            <li>Entra ID / Azure Active Directory</li>
+            <li>Okta / Okta Workflows</li>
+            <li>CyberArk (PAM)</li>
+            <li>Conditional Access</li>
+            <li>Identity Lifecycle / JML</li>
+            <li>Entitlement Management</li>
+            <li>SCIM Provisioning</li>
+            <li>PIM / Access Reviews</li>
+            <li>RBAC / ABAC</li>
+            <li>B2B / Org2Org Federation</li>
+            <li>Passwordless Auth</li>
+            <li>Risk-Based Access</li>
+          </ul>
+        </div>
 
-<div class="hero-image">
-  <img src="resume/profilepicture.png" alt="Blair Ellis" class="profile-pic">
-</div>
-```
+        <div class="resume-block">
+          <div class="resume-block-title">Auth & Protocols</div>
+          <ul class="skill-list">
+            <li>SAML 2.0</li>
+            <li>OAuth 2.0 / OIDC</li>
+            <li>Zero Trust</li>
+            <li>MFA / SSO</li>
+            <li>Microsoft Defender for Identity</li>
+            <li>LDAP / Kerberos</li>
+            <li>RADIUS</li>
+          </ul>
+        </div>
 
-  </div>
-</div>
+        <div class="resume-block">
+          <div class="resume-block-title">Cloud & Tooling</div>
+          <ul class="skill-list">
+            <li>Microsoft 365 / Azure</li>
+            <li>Active Directory / Hybrid Identity</li>
+            <li>Intune</li>
+            <li>PowerShell / Graph API</li>
+            <li>ServiceNow</li>
+            <li>Rubrik Security Cloud</li>
+          </ul>
+        </div>
+
+        <div class="resume-block">
+          <div class="resume-block-title">Certifications</div>
+          <div class="cert-badge">✦ SC-300</div>
+          <div class="cert-badge">✦ Security+</div>
+          <div class="cert-badge">✦ Network+</div>
+          <div class="cert-badge">✦ (ISC)² CC</div>
+          <div class="cert-badge">✦ AZ-900</div>
+          <div class="cert-badge">✦ MS-900</div>
+          <div class="cert-badge">✦ SC-900</div>
+          <div class="cert-badge in-progress">⧖ Okta Certified Professional (est. Mar 2026)</div>
+          <div class="cert-badge in-progress">⧖ Okta Certified Administrator (est. Apr 2026)</div>
+        </div>
+
+        <div class="resume-block">
+          <div class="resume-block-title">Education</div>
+          <ul class="skill-list">
+            <li>B.S. Security Risk Analysis</li>
+            <li>Penn State University</li>
+            <li>2023</li>
+          </ul>
+        </div>
+
+        <div class="resume-block">
+          <div class="resume-block-title">Location</div>
+          <ul class="skill-list">
+            <li>Greater Philadelphia Area</li>
+            <li>Honey Brook, PA (Chester County)</li>
+            <li>Remote / Hybrid Preferred</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Experience -->
+      <div class="resume-main">
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <div class="exp-role">MedRisk</div>
+            <div class="exp-dates">May 2022 — Feb 2026</div>
+          </div>
+          <div class="exp-company" style="color: var(--muted); font-weight: 400;">Conshohocken, PA · Healthcare Cost Containment · ~3,000 Employees</div>
+
+          <!-- Sr. IAM Engineer -->
+          <div class="exp-subrole">
+            <div class="exp-subrole-header">
+              <span class="exp-subrole-title">Sr. IAM Engineer</span>
+              <span class="exp-dates">Apr 2025 — Feb 2026</span>
+            </div>
+            <ul class="exp-bullets">
+              <li>Architected and governed IAM across <strong>dual Entra ID tenants and Okta</strong> for ~3,000 users and 250 applications, defining enterprise standards for SSO, Conditional Access, MFA, Entitlement Management, RBAC/ABAC, and privileged access governance.</li>
+              <li>Managed hybrid identity infrastructure including <strong>Entra Connect Sync and AD-to-Okta synchronization</strong>; designed identity lifecycle workflows using SCIM, Okta Workflows, PowerShell, and Graph API.</li>
+              <li>Onboarded <strong>60+ SAML/OIDC applications</strong> across Entra ID and Okta.</li>
+              <li>Architected B2B federation across dual tenants, eliminating <strong>$500K+ in annual Microsoft licensing costs</strong> and manual provisioning overhead.</li>
+              <li>Built a greenfield Entra ID tenant and migrated <strong>1,400 users in 3 weeks with zero downtime</strong>.</li>
+              <li>Improved Entra Secure Score <strong>45% → 95% in 1 month</strong> by enforcing MFA, deprecating legacy auth, and implementing risk-based Conditional Access.</li>
+              <li>Reduced help desk tickets by <strong>40%</strong> by deploying SSPR to 3,000 users in 2 weeks, enabling enterprise-wide self-remediation.</li>
+              <li>Eliminated standing privileged access across <strong>35 admin accounts</strong> by deploying PIM with JIT access and phishing-resistant MFA, enforced through quarterly security team access reviews.</li>
+              <li>Achieved <strong>zero identity-related audit findings</strong> across two consecutive SOC2 cycles by leveraging Rubrik Security Cloud to validate IAM continuity and recovery procedures across dual Entra ID tenants, Okta, and M365.</li>
+            </ul>
+          </div>
+
+          <!-- IAM Engineer -->
+          <div class="exp-subrole">
+            <div class="exp-subrole-header">
+              <span class="exp-subrole-title">IAM Engineer</span>
+              <span class="exp-dates">Jan 2023 — Apr 2025</span>
+            </div>
+            <ul class="exp-bullets">
+              <li>Administered <strong>Microsoft 365, hybrid AD/Entra ID, and Okta</strong> identity infrastructure for 1,400 users.</li>
+              <li>Managed Exchange Online permissions, shared mailbox governance, and distribution group lifecycle in a hybrid environment.</li>
+              <li>Governed M365 licensing allocation as part of JML workflows, automating assignment and reclamation via <strong>PowerShell and Graph API</strong>.</li>
+              <li>Enforced Teams and SharePoint guest access controls and external collaboration policies aligned to Zero Trust principles.</li>
+              <li>Streamlined onboarding/offboarding workflows via ServiceNow and ADManager Plus.</li>
+              <li>Migrated <strong>1,700 mailboxes to Exchange Online</strong> and fully deprecated Exchange 2010/2016 in 6 weeks, completing hybrid identity cutover with zero mail flow disruption.</li>
+              <li>Onboarded <strong>170 service accounts to CyberArk</strong> in under 4 weeks with automated password rotation and session monitoring, achieving full PAM coverage ahead of audit deadline.</li>
+              <li>Built <strong>25+ JML and identity lifecycle automations</strong> in PowerShell, eliminating 15 hours/week of manual provisioning and access governance tasks.</li>
+            </ul>
+          </div>
+
+          <!-- Help Desk Analyst -->
+          <div class="exp-subrole">
+            <div class="exp-subrole-header">
+              <span class="exp-subrole-title">Help Desk Analyst</span>
+              <span class="exp-dates">May 2022 — Jan 2023</span>
+            </div>
+            <ul class="exp-bullets">
+              <li>Provided remote support for US and international teams via VMware Horizon VDI; managed user provisioning, access, and lifecycle operations across <strong>Active Directory, Microsoft 365, and Okta</strong>.</li>
+              <li>Redesigned PXE imaging process, increasing PC provisioning throughput by <strong>50%</strong>.</li>
+              <li>Authored <strong>30 knowledge base articles</strong>, reducing repeat tickets by 25% and improving onboarding speed by 20%.</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">02 — Work</div>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-tag">Home Lab</div>
+        <div class="project-title">Hybrid Identity Lab</div>
+        <p class="project-desc">Hybrid identity lab using Windows Server 2022, AD DS, Entra Connect Sync, and an Entra developer tenant to simulate enterprise identity architecture. Implemented Conditional Access, PIM, passwordless authentication, Identity Governance (access packages, access reviews, entitlement management), and multi-tenant collaboration patterns including B2B, B2B Direct Connect, and Org2Org.</p>
+        <div class="project-footer">
+          <span class="tag-pill">Windows Server 2022</span>
+          <span class="tag-pill">Entra ID</span>
+          <span class="tag-pill">PowerShell</span>
+          <span class="tag-pill">Graph API</span>
+          <span class="tag-pill">Okta</span>
+          <span class="tag-pill">SCIM</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-tag">Home Lab</div>
+        <div class="project-title">JML Lifecycle Automation</div>
+        <p class="project-desc">End-to-end Joiner-Mover-Leaver automation lab using PowerShell and Microsoft Graph API, simulating HRIS-triggered identity lifecycle events across Entra ID and Okta. Covers provisioning, access assignment, role transitions, and automated deprovisioning workflows.</p>
+        <div class="project-footer">
+          <span class="tag-pill">PowerShell</span>
+          <span class="tag-pill">Graph API</span>
+          <span class="tag-pill">Entra ID</span>
+          <span class="tag-pill">Okta</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span>Blair Ellis — Senior IAM Engineer</span>
+    <span>Greater Philadelphia Area</span>
+  </footer>
 
 </body>
 </html>
